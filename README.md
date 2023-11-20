@@ -1,0 +1,3 @@
+# BookLand - Online Book Store
+
+Book land is a web-based application that enables users or customers to find hardcopies of books online and make a purchase. Customers will be able to search and look for their favorite books from different vendors, authors, and publishers. Through the web application, customers can make an order, and the book will be shipped to their selected location upon purchase. Customers can also leave reviews on the purchased books to help recommend them to other potential customers. The target market for the online store is a wide group of avid and enthusiastic readers who enjoy novels, motivational, educational, and philosophical written content.
