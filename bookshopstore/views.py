@@ -1,10 +1,12 @@
 from django.shortcuts import render
+from .models import Book
 
 # Create your views here.
 
 
 def home(request):
-    return render(request, 'home.html')
+    bookItem = Book.objects.all().order_by('?')
+    return render(request, 'home.html', {'bookItem':bookItem})
 
 def about(request):
     return render(request, 'about.html')
