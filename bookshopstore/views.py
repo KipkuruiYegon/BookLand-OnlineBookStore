@@ -14,8 +14,8 @@ def about(request):
 def news(request):
     return render(request, 'news.html')
 
-def books(request):
-    return render(request, 'books.html')
+def bookcollection(request):
+    return render(request, 'bookcollection.html')
 
 def cart(request):
     return render(request, 'cart.html')
