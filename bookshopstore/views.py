@@ -14,8 +14,8 @@ def about(request):
 def news(request):
     return render(request, 'news.html')
 
-def shop(request):
-    return render(request, 'shop.html')
+def books(request):
+    return render(request, 'books.html')
 
 def cart(request):
     return render(request, 'cart.html')
