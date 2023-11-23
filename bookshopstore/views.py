@@ -33,7 +33,7 @@ def checkout(request):
     return render(request, 'checkout.html', {'navbar':'checkout'})
 
 def login(request):
-    return render(request, 'login.html')
+    return render(request, 'login_signUp.html')
 def register(request):
     return render(request, 'register.html')
 
@@ -43,4 +43,7 @@ def contact(request):
     return render(request, 'contact.html', {'navbar':'contact'})
 def errorpage(request):
     return render(request, '404page.html')
+
+def login_signUp(request):
+    return render(request, 'authentication/login_signUp.html')
 

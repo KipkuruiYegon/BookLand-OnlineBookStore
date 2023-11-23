@@ -22,7 +22,6 @@ class Book(models.Model):
     image = models.ImageField(upload_to='bookcovers', default='cover.jpg')
     publishDate = models.CharField(max_length=100, blank=False)
     ISBN = models.CharField(max_length=100, blank=False)
-
     def __str__(self):
         return self.title
 
@@ -33,10 +32,13 @@ class Customer(models.Model):
     email = models.CharField(max_length=50)
     phone = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
+    image = models.ImageField(upload_to='customers', default='avatar.jpg')
 
     def __str__(self):
         return self.first_name
 
+
+# Order model
 class Order(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE,)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE,)
@@ -49,7 +51,45 @@ class Order(models.Model):
     def __str__(self):
         return self.book
 
+# Book review model
+class Review(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE,)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE,)
+    description = models.CharField(max_length=2000, blank=True, default='', null=True)
+    rating = models.CharField(max_length=100, blank=False)
 
+    def __str__(self):
+        return self.customer
 
+# Message contact model
+class Message(models.Model):
+    username = models.CharField(max_length=100, blank=True)
+    email = models.EmailField(max_length=100, blank=True)
+    subject = models.CharField(max_length=100, blank=True, default='', null=True)
+    body = models.CharField(max_length=2000, blank=True, default='', null=True)
 
+    def __str__(self):
+        return self.username
+
+# Blog model
+class Blog(models.Model):
+    title = models.CharField(max_length=200, blank=True)
+    description = models.CharField(max_length=2000, blank=True)
+    date = models.DateField(default=datetime.datetime.today)
+    image = models.ImageField(upload_to='blogs', default='blog.jpg')
+
+    def __str__(self):
+        return self.title
+
+# Blog comments model
+class CommentBlog(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE,)
+    username = models.CharField(max_length=100, blank=True)
+    email = models.EmailField(max_length=100, blank=True)
+    website = models.CharField(max_length=100, blank=True, default='', null=True)
+    body = models.CharField(max_length=2000, blank=True, default='', null=True)
+    date = models.DateField(default=datetime.datetime.today)
+
+    def __str__(self):
+        return self.username
 

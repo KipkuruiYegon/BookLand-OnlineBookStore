@@ -73,7 +73,11 @@
 	          <li class="nav-item {% if navbar == 'about' %}active{% endif %}"><a href="{% url 'bookshopstore:about' %}" class="nav-link">About</a></li>
 	          <li class="nav-item {% if navbar == 'blog' %}active{% endif %}"><a href="{% url 'bookshopstore:blog' %}" class="nav-link">Blog</a></li>
 	          <li class="nav-item {% if navbar == 'contact' %}active{% endif %}"><a href="{% url 'bookshopstore:contact' %}" class="nav-link">Contact</a></li>
+            <li class="nav-item {% if navbar == 'cart' %}active{% endif %}"><a href="{% url 'bookshopstore:cart' %}" class="nav-link"><span class="icon-user"></span>Login</a></li>
+                <li class="nav-item  {% if navbar == 'cart' %}active{% endif %}"><a href="{% url 'bookshopstore:cart' %}" class="nav-link"><span class="icon-user"></span>James Kwamboka</a></li>
+                <li class="nav-item  {% if navbar == 'cart' %}active{% endif %}"><a href="{% url 'bookshopstore:cart' %}" class="nav-link"><span class="icon-user"></span>Logout</a></li>
 	          <li class="nav-item cta cta-colored {% if navbar == 'cart' %}active{% endif %}"><a href="{% url 'bookshopstore:cart' %}" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+
 
 	        </ul>
 	      </div>
