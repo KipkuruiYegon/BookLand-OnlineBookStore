@@ -73,9 +73,22 @@
 	          <li class="nav-item {% if navbar == 'about' %}active{% endif %}"><a href="{% url 'bookshopstore:about' %}" class="nav-link">About</a></li>
 	          <li class="nav-item {% if navbar == 'blog' %}active{% endif %}"><a href="{% url 'bookshopstore:blog' %}" class="nav-link">Blog</a></li>
 	          <li class="nav-item {% if navbar == 'contact' %}active{% endif %}"><a href="{% url 'bookshopstore:contact' %}" class="nav-link">Contact</a></li>
-            <li class="nav-item {% if navbar == 'cart' %}active{% endif %}"><a href="{% url 'bookshopstore:cart' %}" class="nav-link"><span class="icon-user"></span>Login</a></li>
-                <li class="nav-item  {% if navbar == 'cart' %}active{% endif %}"><a href="{% url 'bookshopstore:cart' %}" class="nav-link"><span class="icon-user"></span>James Kwamboka</a></li>
-                <li class="nav-item  {% if navbar == 'cart' %}active{% endif %}"><a href="{% url 'bookshopstore:cart' %}" class="nav-link"><span class="icon-user"></span>Logout</a></li>
+                {% if user.is_authenticated %}
+             <li class="nav-item  dropdown  {% if navbar == 'logoutaccount' %}active{% endif %}">
+                 <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hello,<span class="icon-user"></span> Kevin</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown04">
+              	<a class="dropdown-item" href="{% url 'bookshopstore:myaccount' %}">My Profile</a>
+                <a class="dropdown-item" href="{% url 'bookshopstore:logoutaccount' %}">Logout</a>
+              </div>
+            </li>
+                {% else %}
+            <li class="nav-item  dropdown  {% if navbar == 'loginaccount' %}active{% endif %}">
+                 <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon-user"></span> Sign in</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown04">
+              	<a class="dropdown-item" href="{% url 'bookshopstore:loginaccount' %}">Sign in</a>
+              </div>
+            </li>
+            {% endif %}
 	          <li class="nav-item cta cta-colored {% if navbar == 'cart' %}active{% endif %}"><a href="{% url 'bookshopstore:cart' %}" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
 
 
@@ -84,8 +97,9 @@
 	    </div>
 	  </nav>
     <!-- END nav -->
-
         {% block body %}
+
+
         {% endblock %}
 
     <footer class="ftco-footer ftco-section">

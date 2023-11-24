@@ -29,6 +29,7 @@ class Book(models.Model):
 class Customer(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
+    username = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
     phone = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
@@ -62,7 +63,7 @@ class Review(models.Model):
         return self.customer
 
 # Message contact model
-class Message(models.Model):
+class MessageInquiry(models.Model):
     username = models.CharField(max_length=100, blank=True)
     email = models.EmailField(max_length=100, blank=True)
     subject = models.CharField(max_length=100, blank=True, default='', null=True)
@@ -92,4 +93,13 @@ class CommentBlog(models.Model):
 
     def __str__(self):
         return self.username
+
+class Feedback(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE,)
+    body = models.CharField(max_length=2000, blank=True)
+    satisfaction = models.CharField(max_length=100, blank=False)
+
+    def __str__(self):
+        return self.customer
+
 

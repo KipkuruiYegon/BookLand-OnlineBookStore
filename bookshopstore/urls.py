@@ -14,7 +14,9 @@ urlpatterns = [
     path('cart/', views.cart, name="cart"),
     path('blog/', views.blog, name="blog"),
     path('checkout/', views.checkout, name="checkout"),
-    path('authentication/login_signUp/', views.login_signUp, name="login_signUp"),
-    path('register/', views.register, name="register"),
+    path('loginaccount/', views.loginaccount, name="loginaccount"),
+    path('signupaccount/', views.signupaccount, name="signupaccount"),
+    path('logoutaccount/', views.logoutaccount, name="logoutaccount"),
+    path('myaccount/', views.myaccount, name="myaccount"),
     path('thankyou/', views.thankyou, name="thankyou")
 ]
