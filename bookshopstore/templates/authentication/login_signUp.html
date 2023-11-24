@@ -12,13 +12,6 @@
           	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Contact</span></p>
             <h1 class="mb-0 bread">Login / Sign Up</h1>
 
-      {% for message in messages %}
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>{{ message }}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-      {% endfor %}
-
           </div>
         </div>
       </div>
@@ -60,7 +53,8 @@
           </div>
 
          <div class="col-md-6 order-md-last d-flex">
-            <form action="#" class="bg-white p-5 contact-form">
+            <form action="{% url 'bookshopstore:signupaccount' }" class="bg-white p-5 contact-form">
+                {% csrf_token %}
 				<h2 class="fw-bolde" style="font-weight:bolder">SignUp </h2>
                 <div class="form-group">
                 <input type="text" class="form-control" placeholder="Your UserName">
