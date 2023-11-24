@@ -62,11 +62,11 @@
                   <a href="{% url 'bookshopstore:home' %}" class="nav-link">Home</a>
               </li>
 	          <li class="nav-item  dropdown  {% if navbar == 'bookcollection' %}active{% endif %}">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catalog</a>
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Book Catalog</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="{% url 'bookshopstore:bookcollection' %}">Book Collection</a>
-                <a class="dropdown-item" href="{% url 'bookshopstore:cart' %}">Cart</a>
-                <a class="dropdown-item" href="{% url 'bookshopstore:checkout' %}">Checkout</a>
+              	<a class="dropdown-item" href="{% url 'bookshopstore:bookcollection' %}">All Books Collection</a>
+                <a class="dropdown-item" href="">Lifestyle</a>
+                <a class="dropdown-item" href="">Biography</a>
               </div>
             </li>
 	          <li class="nav-item {% if navbar == 'about' %}active{% endif %}"><a href="{% url 'bookshopstore:about' %}" class="nav-link">About</a></li>
@@ -74,10 +74,12 @@
 	          <li class="nav-item {% if navbar == 'contact' %}active{% endif %}"><a href="{% url 'bookshopstore:contact' %}" class="nav-link">Contact</a></li>
                 {% if user.is_authenticated %}
              <li class="nav-item  dropdown  {% if navbar == 'logoutaccount' %}active{% endif %}">
-                 <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome,<span class="icon-user"></span> Kevin</a>
+                <a class="nav-link dropdown-toggle" href="{% url 'bookshopstore:myaccount' %}" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome <span class="icon-user"></span> Kevin</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
               	<a class="dropdown-item" href="{% url 'bookshopstore:myaccount' %}">My Profile</a>
                 <a class="dropdown-item" href="{% url 'bookshopstore:logoutaccount' %}">Logout</a>
+                  <a class="dropdown-item" href="{% url 'bookshopstore:cart' %}">Cart</a>
+                  <a class="dropdown-item" href="{% url 'bookshopstore:checkout' %}">Checkout</a>
                   <a class="dropdown-item" href="{% url 'bookshopstore:loginaccount' %}">Sign in</a>
               </div>
             </li>
@@ -86,6 +88,8 @@
                  <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon-user"></span> Sign in</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
               	<a class="dropdown-item" href="{% url 'bookshopstore:loginaccount' %}">Sign in</a>
+                  <a class="dropdown-item" href="{% url 'bookshopstore:cart' %}">Cart</a>
+                  <a class="dropdown-item" href="{% url 'bookshopstore:checkout' %}">Checkout</a>
 
               </div>
             </li>

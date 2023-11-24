@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Book
+from .models import Book, Category
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.shortcuts import redirect
@@ -9,8 +9,8 @@ from django.shortcuts import redirect
 
 
 def home(request):
-    bookItem = Book.objects.all().order_by('?')
-    return render(request, 'home.html', {'bookItem': bookItem, 'navbar': 'home'})
+    book = Book.objects.all().order_by('?')
+    return render(request, 'home.html', {'book': book, 'navbar': 'home'})
 
 
 def about(request):
@@ -22,13 +22,19 @@ def news(request):
 
 
 def bookcollection(request):
-    bookItem = Book.objects.all().order_by('?')
-    return render(request, 'bookcollection.html', {'bookItem': bookItem, 'navbar': 'bookcollection'})
+    book = Book.objects.all().order_by('?')
+    category = Category.objects.all().order_by('?')
+    return render(request, 'bookcollection.html', {'book': book, 'category': category, 'navbar': 'bookcollection'})
 
 
 def book_details(request, id):
-    bookItem = Book.objects.get(id=id)
-    return render(request, 'book_details.html', {'bookItem': bookItem})
+    book = Book.objects.get(id=id)
+    return render(request, 'book_details.html', {'book': book})
+
+def category_books_collection(request, id):
+    category = Category.objects.get(id=id)
+    book = Book.objects.filter(category=category)
+    return render(request, 'category_books_collection.html',{'category': category, 'book': book})
 
 def blog_details(request):
     return render(request, 'blog_details.html')

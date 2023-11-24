@@ -10,6 +10,7 @@ urlpatterns = [
     path('errorpage/', views.errorpage, name="errorpage"),
     path('bookcollection/', views.bookcollection, name="bookcollection"),
     path('book_details/<id>/', views.book_details, name="book_details"),
+    path('category_books_collection/<id>/', views.category_books_collection, name="category_books_collection"),
     path('blog_details/', views.blog_details, name="blog_details"),
     path('cart/', views.cart, name="cart"),
     path('blog/', views.blog, name="blog"),

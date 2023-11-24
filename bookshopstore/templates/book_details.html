@@ -19,7 +19,7 @@
     	<div class="container">
     		<div class="row">
     			<div class="col-lg-6 mb-5 ftco-animate">
-    				<a href="/media/{{ bookItem.image }}" class="image-popup prod-img-bg"><img src="/media/{{ bookItem.image }}" class="img-fluid" alt="{{ bookItem.image }}"></a>
+    				<a href="/media/{{ book.image }}" class="image-popup prod-img-bg"><img src="/media/{{ book.image }}" class="img-fluid" alt="{{ book.image }}"></a>
     			</div>
     			<div class="col-lg-6 product-details pl-md-5 ftco-animate">
     				<h3>{{ bookItem.title }}</h3>
@@ -39,9 +39,9 @@
 								<a href="#" class="mr-2" style="color: #000;">500 <span style="color: #bbb;">Sold</span></a>
 							</p>
 						</div>
-    				<p class="price"><span>Ksh {{ bookItem.price }}</span></p>
-    				<p>{{ bookItem.description }}</p>
-    				<p>{{ bookItem.description }}</p>
+    				<p class="price"><span>Ksh {{ book.price }}</span></p>
+    				<p>{{ book.description }}</p>
+    				<p>{{ book.description }}</p>
 						<div class="row mt-4">
 							<div class="col-md-6">
 								<div class="form-group d-flex">
@@ -99,18 +99,18 @@
 
               <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="day-1-tab">
               	<div class="p-4">
-	              	<h3 class="mb-4">{{ bookItem.title }}</h3>
-	              	<p>{{ bookItem.description }}</p>
+	              	<h3 class="mb-4">{{ book.title }}</h3>
+					<p>Classiffication : {{ book.category }}</p>
+	              	<p>{{ book.description }}</p>
               	</div>
               </div>
 
               <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-day-2-tab">
               	<div class="p-4">
-	              	<h3 class="mb-4">Published by {{ bookItem.publisher}}</h3>
-					<p>{{ bookItem.category }}</p>
-					<p>{{ bookItem.author }}</p>
-					<p>{{ bookItem.publishDate }}</p>
-					<p>{{ bookItem.ISBN }}</p>
+	              	<h3 class="mb-4">Published by {{ book.publisher}}</h3>
+					<p>Author : {{ book.author }}</p>
+					<p>Date: {{ book.publishDate }}</p>
+					<p>ISBN : {{ book.ISBN }}</p>
 				</div>
               </div>
               <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-day-3-tab">
