@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Book, Category
+from .models import Book, Category, Cart, Blog
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.shortcuts import redirect
@@ -31,13 +31,24 @@ def book_details(request, id):
     book = Book.objects.get(id=id)
     return render(request, 'book_details.html', {'book': book})
 
+
 def category_books_collection(request, id):
     category = Category.objects.get(id=id)
     book = Book.objects.filter(category=category)
-    return render(request, 'category_books_collection.html',{'category': category, 'book': book})
+    return render(request, 'category_books_collection.html', {'category': category, 'book': book})
 
-def blog_details(request):
-    return render(request, 'blog_details.html')
+
+def addbook_cart(request, id):
+    return render(request, 'cart.html')
+
+
+def removebook_cart(request, id):
+    return render(request, 'cart.html')
+
+
+def blog_details(request, id):
+    blog = Blog.objects.get(id=id)
+    return render(request, 'blog_details.html', {'blog': blog})
 
 
 def cart(request):
@@ -45,7 +56,8 @@ def cart(request):
 
 
 def blog(request):
-    return render(request, 'blog.html', {'navbar': 'blog'})
+    blog = Blog.objects.all()
+    return render(request, 'blog.html', {'blog': blog, 'navbar': 'blog'})
 
 
 def checkout(request):
@@ -53,7 +65,7 @@ def checkout(request):
 
 
 def signup(request):
-    return render(request, 'login_signUp.html')
+    return render(request, 'login_account.html')
 
 
 def thankyou(request):
@@ -68,30 +80,30 @@ def errorpage(request):
     return render(request, '404page.html')
 
 
-def loginaccount(request):
+def login_account(request):
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            messages.success(request, "Logged in Successfully")
-            return redirect("/")
+            messages.success(request, "Login Success")
+            return redirect("/login_account")
         else:
-            messages.success(request, "Error Logging in")
-            return redirect("/loginaccount")
+            messages.success(request, "Invalid username or password")
+            return redirect("/login_account")
 
-    return render(request, 'authentication/login_signUp.html', {'navbar': 'loginaccount'})
-
-
-def signupaccount(request):
-    return render(request, 'authentication/login_signUp.html')
+    return render(request, 'authentication/login_account.html', {'navbar': 'login_account'})
 
 
-def logoutaccount(request):
+def register_account(request):
+    return render(request, 'authentication/register_account.html')
+
+
+def logout_account(request):
     logout(request)
-    messages.success(request, "Logged Out Successfully, Please Login to continue shopping")
-    return redirect("/loginaccount")
+    messages.success(request, "You logged out")
+    return redirect("/login_account")
 
 
 def myaccount(request):
