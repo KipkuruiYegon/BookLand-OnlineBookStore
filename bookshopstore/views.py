@@ -1,9 +1,6 @@
-from django.shortcuts import render
-from .models import Book, Category, Cart, Blog
-from django.contrib.auth import authenticate, login, logout
-from django.contrib import messages
-from django.shortcuts import redirect
-
+from django.shortcuts import render,redirect
+from .models import Book, Category, Blog
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -63,11 +60,6 @@ def blog(request):
 def checkout(request):
     return render(request, 'checkout.html', {'navbar': 'checkout'})
 
-
-def signup(request):
-    return render(request, 'login_account.html')
-
-
 def thankyou(request):
     return render(request, 'thankyou.html')
 
@@ -78,33 +70,3 @@ def contact(request):
 
 def errorpage(request):
     return render(request, '404page.html')
-
-
-def login_account(request):
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            messages.success(request, "Login Success")
-            return redirect("/login_account")
-        else:
-            messages.success(request, "Invalid username or password")
-            return redirect("/login_account")
-
-    return render(request, 'authentication/login_account.html', {'navbar': 'login_account'})
-
-
-def register_account(request):
-    return render(request, 'authentication/register_account.html')
-
-
-def logout_account(request):
-    logout(request)
-    messages.success(request, "You logged out")
-    return redirect("/login_account")
-
-
-def myaccount(request):
-    return render(request, 'authentication/myaccount.html')

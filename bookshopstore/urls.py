@@ -17,9 +17,5 @@ urlpatterns = [
     path('removebook_cart/', views.removebook_cart, name="removebook_cart"),
     path('blog/', views.blog, name="blog"),
     path('checkout/', views.checkout, name="checkout"),
-    path('login_account/', views.login_account, name="login_account"),
-    path('register_account/', views.register_account, name="register_account"),
-    path('logout_account/', views.logout_account, name="logout_account"),
-    path('myaccount/', views.myaccount, name="myaccount"),
     path('thankyou/', views.thankyou, name="thankyou")
 ]
