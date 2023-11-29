@@ -5,72 +5,86 @@
 {% block body %}
 
 
-<!--    <div class="hero-wrap hero-bread" style="background-image: url('{% static 'images/bg_6.jpg' %}');">-->
-<!--      <div class="container">-->
-<!--        <div class="row no-gutters slider-text align-items-center justify-content-center">-->
-<!--          <div class="col-md-9 ftco-animate text-center">-->
-<!--          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Contact</span></p>-->
-<!--            <h1 class="mb-0 bread">Login / Sign Up</h1>-->
+    <div class="hero-wrap hero-bread" style="background-image: url('{% static 'images/bg_6.jpg' %}');">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Contact</span></p>
+            <h1 class="mb-0 bread">Sign Up</h1>
 
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
+          </div>
+        </div>
+      </div>
+    </div>
 
     <section class="ftco-section contact-section bg-light">
       <div class="container">
       	<div class="row d-flex mb-5 contact-info">
-          <div class="w-100"></div>
-<!--          <div class="col-md-6 d-flex">-->
-<!--          	<div class="info bg-primary p-4">-->
-<!--                <h2 class="fw-bolde" style="font-weight:bolder">Have an account? Login </h2>-->
-<!--	          </div>-->
-<!--          </div>-->
+          <div class="w-100">
 
+		  </div>
          <div class="col-md-6 d-flex">
+          	<div class="info bg-warning p-4">
+                <h2 class="fw-bolde" style="font-weight:bolder">Create an account - SignUp </h2>
+	          </div>
+          </div>
+			  <div class="col-md-6 d-flex">
           	<div class="info bg-warning p-4">
                 <h2 class="fw-bolde" style="font-weight:bolder">Create an account - SignUp </h2>
 	          </div>
           </div>
         </div>
         <div class="row block-9">
+          <div class="col-md-6 order-md-last d-flex">
 
-         <div class="col-md-6 order-md-last d-flex">
+            <form  method="post" class="bg-white p-5 contact-form">
+				{% csrf_token %}
 
-            <form action="" method="post" class="bg-white p-5 contact-form">
-				{% for message in messages %}-->
+			{% for message in messages %}
+					{% if form.errors %}
+				<div class="alert alert-warning" role="alert">
+                  {{ form.error }}
+                </div>
+				{% else %}
               <div class="alert alert-warning" role="alert">
                   {{ message }}
                 </div>
-              {% endfor %}
+				{% endif %}
+			{% endfor %}
 
-				{% csrf_token %}
-			  {{form.as_p}}
+				<h2 class="fw-bolde" style="font-weight:bolder">SignUp</h2>
 
-<!--			<h2 class="fw-bolde" style="font-weight:bolder">SignUp </h2>-->
-<!--                <div class="form-group">-->
-<!--                 {{ form.username }}-->
-<!--              </div>-->
-<!--              <div class="form-group">-->
-<!--                 {{ form.email }}-->
-<!--              </div>-->
-<!--              <div class="form-group">-->
-<!--                 {{ form.phone }}-->
-<!--              </div>-->
-<!--                 <div class="form-group">-->
-<!--                 {{ form.password1 }}-->
-<!--              </div>-->
-<!--				<div class="form-group">-->
-<!--                 <div class="form-group">-->
-<!--                 {{ form.password2 }}-->
-<!--              </div>-->
-<!--              </div>-->
               <div class="form-group">
-                <input type="submit" value="SignUp" class="btn btn-warning py-3 px-5">
+				  <label for="Username" class="form-label">Username</label>
+				  {{ form.username }}
+			  </div>
+             <div class="form-group">
+				 <label for="First Name" class="form-label">First Name</label>
+				  {{ form.first_name }}
+			  </div>
+				<div class="form-group">
+					 <label for="Last Name" class="form-label">Last Name</label>
+				  {{ form.last_name }}
+			  </div>
+				<div class="form-group">
+					 <label for="Emailaddress" class="form-label">Email address</label>
+				  {{ form.email }}
+			  </div>
+				<div class="form-group">
+					 <label for="password" class="form-label">Enter Password</label>
+				  {{ form.password1 }}
+			  </div>
+				<div class="form-group">
+					 <label for="Confirm" class="form-label">Verify Password</label>
+				  {{ form.password2 }}
+			  </div>
+              <div class="form-group">
+                <input type="submit" value="SignUp" class="btn btn-primary py-3 px-5">
               </div>
             </form>
 
           </div>
+			<div class="col-md-6 order-md-last d-flex" style="background-image: url('{% static 'images/bg_6.jpg' %}');"></div>
         </div>
       </div>
     </section>

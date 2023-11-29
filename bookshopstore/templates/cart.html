@@ -4,12 +4,13 @@
 
 {% block body %}
 
-    <div class="hero-wrap hero-bread" style="background-image: url('{% static 'images/bg_6.jpg' %}');">
+<div class="hero-wrap hero-bread" style="background-image: url('{% static 'images/bg_6.jpg' %}');">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
           	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Cart</span></p>
-            <h1 class="mb-0 bread">My Wishlist</h1>
+            <h1 class="mb-0 bread">My Wishlist <span class="icon-heart"></span>{{ order.get_cart_items }} Copies</h1>
+			  <a style="border-radius:0px; width:250px;background-color: black;"  class="btn btn-primary add-to-cart text-center py-2 mr-1 addbook-btn " ><span>Continue Shopping <i class="ion-ios-add ml-1"></i></span></a>
           </div>
         </div>
       </div>
@@ -20,11 +21,12 @@
 				<div class="row">
     			<div class="col-md-12 ftco-animate">
     				<div class="cart-list">
+
 	    				<table class="table">
 						    <thead class="thead-primary">
 						      <tr class="text-center">
 						        <th>Remove</th>
-						        <th>Cover</th>
+						        <th>Image</th>
 						        <th>Product</th>
 						        <th>Price</th>
 						        <th>Quantity</th>
@@ -32,53 +34,37 @@
 						      </tr>
 						    </thead>
 						    <tbody>
+							{% if items %}
+							{% for item in items %}
 						      <tr class="text-center">
 						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-						        
-						        <td class="image-prod"><div class="img" style="background-image:url({% static 'images/muhamad ali.png' %});"></div></td>
-						        
-						        <td class="product-name">
-						        	<h3>THE GREATEST: MY OWN STORY</h3>
-						        	<p>Everybody knows the record the stuff of almanacs, trade magazines and clipping services.</p>
-						        </td>
-						        
-						        <td class="price">Ksh 4578.00</td>
-						        
-						        <td class="quantity">
-						        	<div class="input-group mb-3">
-					             	<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
-					          	</div>
-					          </td>
-						        
-						        <td class="total">Ksh 4578.00</td>
-						      </tr>
 
-							  <tr class="text-center">
-						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-
-						        <td class="image-prod"><div class="img" style="background-image:url({% static 'images/muhamad ali.png' %});"></div></td>
+						        <td class="image-prod"><div class="img" style="background-image:url(/media/{{ item.book.image }});"></div></td>
 
 						        <td class="product-name">
-						        	<h3>THE GREATEST: MY OWN STORY</h3>
-						        	<p>Everybody knows the record the stuff of almanacs, trade magazines and clipping services.</p>
+						        	<h3>{{ item.book.title }}</h3>
+<!--						        	<p>{{ item.book.description }}</p>-->
 						        </td>
 
-						        <td class="price">Ksh 4578.00</td>
+						        <td class="price">Ksh {{ item.book.price }}</td>
 
 						        <td class="quantity">
 						        	<div class="input-group mb-3">
-					             	<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
+					             	<input type="text" name="quantity" class="quantity form-control input-number" value="{{ item.quantity }}" min="1" max="100">
 					          	</div>
 					          </td>
 
-						        <td class="total">Ksh 4578.00</td>
+						        <td class="total">Ksh {{ item.get_total  }}</td>
 						      </tr>
+							  {% endfor %}
 							  <!-- END TR-->
+							 {% else %}
+							<tr>
+								<td colspan="6" class="text-center">Your cart is empty.</td>
+							</tr>
+    					{% endif %}
 
 
-						        
-						        <td class="total">$15.70</td>
-						      </tr><!-- END TR-->
 						    </tbody>
 						  </table>
 					  </div>
@@ -90,20 +76,20 @@
     					<h3>Cart Totals</h3>
     					<p class="d-flex">
     						<span>Subtotal</span>
-    						<span>$20.60</span>
+    						<span>Ksh {{ order.get_cart_total }}</span>
     					</p>
     					<p class="d-flex">
     						<span>Delivery</span>
-    						<span>$0.00</span>
+    						<span>Ksh 150.00 x {{ order.get_cart_items }} books</span>
     					</p>
     					<p class="d-flex">
     						<span>Discount</span>
-    						<span>$3.00</span>
+    						<span>Ksh 100 </span>
     					</p>
     					<hr>
     					<p class="d-flex total-price">
     						<span>Total</span>
-    						<span>$17.60</span>
+    						<span>Ksh {{ order.get_cart_total }}</span>
     					</p>
     				</div>
     				<p class="text-center"><a href="{% url 'bookshopstore:checkout' %}" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>

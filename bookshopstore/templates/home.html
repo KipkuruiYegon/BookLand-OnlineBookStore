@@ -5,17 +5,18 @@
 {% block body %}
     <section id="home-section" class="hero">
 		  <div class="home-slider owl-carousel">
+			  {% for slider in slider %}
 	      <div class="slider-item js-fullheight">
 	      	<div class="overlay"></div>
 	        <div class="container-fluid p-0">
 	          <div class="row d-md-flex no-gutters slider-text align-items-center justify-content-end" data-scrollax-parent="true">
-	          	<img class="one-third order-md-last img-fluid" src="{% static 'images/bg_1.png' %}" alt="">
+	          	<img class="one-third order-md-last img-fluid" src="/media/{{ slider.image }}" alt="">
 		          <div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
 		          	<div class="text">
 						<span class="subheading">#Offer 10% off</span>
 		          		<div class="horizontal">
-				            <h1 class="mb-4 mt-3">Book Collection 2019</h1>
-				            <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country.</p>
+				            <h1 class="mb-4 mt-3">Welcome to BookLand-Store</h1>
+				            <p class="mb-4">Your one stop online bookstore for your favourite and thrilling books</p>
 				            
 				            <p><a href="{% url 'bookshopstore:bookcollection' %}" class="btn-custom">Discover Now</a></p>
 				          </div>
@@ -24,26 +25,7 @@
 	        	</div>
 	        </div>
 	      </div>
-
-	      <div class="slider-item js-fullheight">
-	      	<div class="overlay"></div>
-	        <div class="container-fluid p-0">
-	          <div class="row d-flex no-gutters slider-text align-items-center justify-content-end" data-scrollax-parent="true">
-	          	<img class="one-third order-md-last img-fluid" src="{% static 'images/bg_2.png' %}" alt="">
-		          <div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-		          	<div class="text">
-		          		<span class="subheading">#New Arrival</span>
-		          		<div class="horizontal">
-				            <h1 class="mb-4 mt-3">New Shoes Winter Collection</h1>
-				            <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country.</p>
-				            
-				            <p><a href="#" class="btn-custom">Discover Now</a></p>
-				          </div>
-		            </div>
-		          </div>
-	        	</div>
-	        </div>
-	      </div>
+			  {% endfor %}
 	    </div>
     </section>
 
@@ -125,7 +107,7 @@
 	    						<p class="price"><span>Ksh {{ book.price }}</span></p>
 	    					</div>
 	    					<p class="bottom-area d-flex px-3">
-    							<a href="{% url 'bookshopstore:cart' %}" class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+    							<a style="border-radius:0px; width:250px;background-color: black;"  class="btn btn-primary addcartbookbtn add-to-cart text-center py-2 mr-1 " data-action="action"  data-book="{{ book.book_id}}"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
     							<a href="{% url 'bookshopstore:checkout' %}" class="buy-now text-center py-2">Buy now<span><i class="ion-ios-cart ml-1"></i></span></a>
     						</p>
     					</div>
@@ -138,17 +120,66 @@
     	</div>
     </section>
 
+<section class="ftco-section bg-light">
+    	<div class="container">
+				<div class="row justify-content-center mb-3 pb-3">
+          <div class="col-md-12 heading-section text-center ftco-animate">
+            <h2 class="mb-4">Best Selling Books</h2>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+          </div>
+        </div>
+    	</div>
+    	<div class="container">
+    		<div class="row">
 
+				{% for book in book %}
+    			<div class="col-sm-12 col-md-6 col-lg-3 ftco-animate d-flex">
+    				<div class="product d-flex flex-column">
+    					<a href="/book_details/{{ book.id }}" class="img-prod"><img class="img-fluid" src="media/{{ book.image }}" alt="{{ book.image}}" >
+    						<div class="overlay"></div>
+    					</a>
+    					<div class="text py-3 pb-4 px-3">
+    						<div class="d-flex">
+    							<div class="cat">
+		    						<span>{{ book.category }}</span>
+		    					</div>
+		    					<div class="rating">
+	    							<p class="text-right mb-0">
+	    								<a href="#"><span class="ion-ios-star-outline"></span></a>
+	    								<a href="#"><span class="ion-ios-star-outline"></span></a>
+	    								<a href="#"><span class="ion-ios-star-outline"></span></a>
+	    								<a href="#"><span class="ion-ios-star-outline"></span></a>
+	    								<a href="#"><span class="ion-ios-star-outline"></span></a>
+	    							</p>
+	    						</div>
+	    					</div>
+    						<h3><a href="#">{{ book.title }}</a></h3>
+    						<div class="pricing">
+	    						<p class="price"><span>Ksh {{ book.price }}</span></p>
+	    					</div>
+	    					<p class="bottom-area d-flex px-3">
+    							<a href="" class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+    							<a href="{% url 'bookshopstore:checkout' %}" class="buy-now text-center py-2">Buy now<span><i class="ion-ios-cart ml-1"></i></span></a>
+    						</p>
+    					</div>
+    				</div>
+    			</div>
+				{% endfor %}
+<!--   end of featured-->
+
+    		</div>
+    	</div>
+    </section>
 
     <section class="ftco-section ftco-choose ftco-no-pb ftco-no-pt">
     	<div class="container">
 				<div class="row no-gutters">
 					<div class="col-lg-4">
-						<div class="choose-wrap divider-one img p-5 d-flex align-items-end" style="background-image: url({% static 'images/choose-1.jpg' %});">
+						<div class="choose-wrap divider-one img p-5 d-flex align-items-end" style="background-image: url({% static 'images/face.jpg' %});">
 
     					<div class="text text-center text-white px-2">
-								<span class="subheading">Men's Shoes</span>
-    						<h2>Men's Collection</h2>
+								<span class="subheading">African</span>
+    						<h2>African Stories Collection</h2>
     						<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
     						<p><a href="#" class="btn btn-black px-3 py-2">Shop now</a></p>
     					</div>
@@ -157,11 +188,11 @@
 					<div class="col-lg-8">
     				<div class="row no-gutters choose-wrap divider-two align-items-stretch">
     					<div class="col-md-12">
-	    					<div class="choose-wrap full-wrap img align-self-stretch d-flex align-item-center justify-content-end" style="background-image: url({% static 'images/choose-2.jpg' %});">
+	    					<div class="choose-wrap full-wrap img align-self-stretch d-flex align-item-center justify-content-end" style="background-image: url({% static 'images/maasai.jpg' %});">
 	    						<div class="col-md-7 d-flex align-items-center">
 	    							<div class="text text-white px-5">
-	    								<span class="subheading">Women's Shoes</span>
-			    						<h2>Women's Collection</h2>
+	    								<span class="subheading">Culture</span>
+			    						<h2>Culture Collection</h2>
 			    						<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
 			    						<p><a href="#" class="btn btn-black px-3 py-2">Shop now</a></p>
 			    					</div>
@@ -173,7 +204,7 @@
     							<div class="col-md-6">
 		    						<div class="choose-wrap wrap img align-self-stretch bg-light d-flex align-items-center">
 		    							<div class="text text-center px-5">
-		    								<span class="subheading">Summer Sale</span>
+		    								<span class="subheading">Lifestyle Books</span>
 				    						<h2>Extra 50% Off</h2>
 				    						<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
 				    						<p><a href="#" class="btn btn-black px-3 py-2">Shop now</a></p>
@@ -181,10 +212,10 @@
 		    						</div>
 	    						</div>
 	    						<div class="col-md-6">
-		    						<div class="choose-wrap wrap img align-self-stretch d-flex align-items-center" style="background-image: url({% static 'images/choose-3.jpg' %});">
+		    						<div class="choose-wrap wrap img align-self-stretch d-flex align-items-center" style="background-image: url({% static 'images/nature.jpg' %});">
 		    							<div class="text text-center text-white px-5">
-		    								<span class="subheading">Shoes</span>
-				    						<h2>Best Sellers</h2>
+		    								<span class="subheading">Novels</span>
+				    						<h2>Novel Books</h2>
 				    						<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
 				    						<p><a href="#" class="btn btn-black px-3 py-2">Shop now</a></p>
 				    					</div>
@@ -202,7 +233,7 @@
     	<div class="container">
     		<div class="row">
     			<div class="col-md-6">
-    				<img src="{% static 'images/prod-1.png' %}" class="img-fluid" alt="">
+    				<img src="{% static 'images/the man.png' %}" class="img-fluid" alt="">
     			</div>
     			<div class="col-md-6">
     				<div class="heading-section heading-section-white">
@@ -219,7 +250,7 @@
 							<h2><a href="#">The man in the High Castle</a></h2>
 							<p class="price"><span class="mr-2 price-dc">Ksh 4,800.00</span><span class="price-sale">Ksh 2,800.00</span></p>
 							<ul class="thumb-deal d-flex mt-4">
-								<li class="img" style="background-image: url({% static 'images/product-6.png' %});"></li>
+								<li class="img" style="background-image: url({% static 'images/the man.png' %});"></li>
 								<li class="img" style="background-image: url(images/product-2.png);"></li>
 								<li class="img" style="background-image: url(images/product-4.png);"></li>
 							</ul>
@@ -365,48 +396,16 @@
     	</div>
     	<div class="container-fluid px-0">
     		<div class="row no-gutters">
+				{% for socialFollow in socialFollow %}
 					<div class="col-md-4 col-lg-2 ftco-animate">
-						<a href="images/gallery-1.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url({% static 'images/gallery-1.jpg' %});">
+						<a href="media/{{ socialFollow.image }}" class="gallery image-popup img d-flex align-items-center" style="background-image: url( media/{{ socialFollow.image }} );">
 							<div class="icon mb-4 d-flex align-items-center justify-content-center">
     						<span class="icon-instagram"></span>
     					</div>
 						</a>
 					</div>
-					<div class="col-md-4 col-lg-2 ftco-animate">
-						<a href="images/gallery-2.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-2.jpg);">
-							<div class="icon mb-4 d-flex align-items-center justify-content-center">
-    						<span class="icon-instagram"></span>
-    					</div>
-						</a>
-					</div>
-					<div class="col-md-4 col-lg-2 ftco-animate">
-						<a href="images/gallery-3.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-3.jpg);">
-							<div class="icon mb-4 d-flex align-items-center justify-content-center">
-    						<span class="icon-instagram"></span>
-    					</div>
-						</a>
-					</div>
-					<div class="col-md-4 col-lg-2 ftco-animate">
-						<a href="images/gallery-4.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-4.jpg);">
-							<div class="icon mb-4 d-flex align-items-center justify-content-center">
-    						<span class="icon-instagram"></span>
-    					</div>
-						</a>
-					</div>
-					<div class="col-md-4 col-lg-2 ftco-animate">
-						<a href="images/gallery-5.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-5.jpg);">
-							<div class="icon mb-4 d-flex align-items-center justify-content-center">
-    						<span class="icon-instagram"></span>
-    					</div>
-						</a>
-					</div>
-					<div class="col-md-4 col-lg-2 ftco-animate">
-						<a href="images/gallery-6.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/gallery-6.jpg);">
-							<div class="icon mb-4 d-flex align-items-center justify-content-center">
-    						<span class="icon-instagram"></span>
-    					</div>
-						</a>
-					</div>
+				{% endfor %}
+
         </div>
     	</div>
     </section>

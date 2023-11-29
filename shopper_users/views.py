@@ -1,22 +1,34 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.contrib.auth.models import User
-from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from .forms import SignupForm
 
 
 # Create your views here.
+
+
+def signup_Page(request):
+    return render(request, 'authentication/register_account.html')
+
+
 def register_account(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
-        messages.success(request, "Account Created Successfully")
-        return redirect('/shopper_users/signin_Page/')
+            messages.success(request, "Account Created Successfully")
+            return redirect('/shopper_users/signin_Page/')
+        else:
+            messages.error(request, "Error")
+            return redirect('/shopper_users/register_account/')
     else:
-        form = UserCreationForm()
+        form = SignupForm()
     return render(request, 'authentication/register_account.html', {'form': form})
+
+
+def signin_Page(request):
+    return render(request, 'authentication/login_account.html')
 
 
 def login_account(request):
@@ -33,14 +45,6 @@ def login_account(request):
             return redirect("/shopper_users/signin_Page/")
 
     return render(request, 'authentication/login_account.html', {'navbar': 'login_account'})
-
-
-def signup_Page(request):
-    return render(request, 'authentication/register_account.html')
-
-
-def signin_Page(request):
-    return render(request, 'authentication/login_account.html')
 
 
 def logout_account(request):

@@ -2,28 +2,21 @@ from django.contrib import admin
 
 # Register your models here.
 
-from . models import Category
-from . models import Book
-from . models import Customer
-from . models import Order
-from . models import Review
-from . models import Blog
-from . models import MessageInquiry
-from . models import CommentBlog
-from . models import Cart
-from . models import Address
-from . models import Tag
-from . models import Feedback
+from .models import *
 
 admin.site.register(Category)
 admin.site.register(Book)
+admin.site.register(ShippingDetail)
+admin.site.register(ReviewBook)
+admin.site.register(Blog)
 admin.site.register(Customer)
 admin.site.register(Order)
-admin.site.register(Review)
-admin.site.register(Blog)
-admin.site.register(Cart)
+admin.site.register(OrderItem)
 admin.site.register(Address)
-admin.site.register(Tag)
-admin.site.register(MessageInquiry)
+admin.site.register(TagTrend)
+admin.site.register(MessageContactsection)
 admin.site.register(CommentBlog)
-admin.site.register(Feedback)
+admin.site.register(FeedbackTestimonial)
+admin.site.register(SliderHome)
+admin.site.register(Socialfollow)
+admin.site.register(PromoPageImage)
