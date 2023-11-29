@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
-from .models import *
-from django.http import JsonResponse
-import json
 from django.contrib.auth.models import User
+from .models import *
+from django.http import JsonResponse, HttpResponse
+import json
+# for query handling
+from django.db.models import Q
 
 
 # Create your views here.
@@ -49,7 +51,7 @@ def bookcollection(request):
     book = Book.objects.all().order_by('?')
     category = Category.objects.all().order_by('?')
     return render(request, 'bookcollection.html',
-                  {'book': book, 'category': category, 'cartItems': cartItems, 'navbar': 'bookcollection'})
+                  {'book': book, 'items': items, 'category': category, 'cartItems': cartItems,'navbar': 'bookcollection'})
 
 
 def book_details(request, id):
@@ -139,8 +141,26 @@ def checkout(request):
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0}
         cartItems = order['get_cart_items']
-    return render(request, 'checkout.html', {'items': items, 'order': order,'cartItems': cartItems, 'navbar': 'cart'})
+    return render(request, 'checkout.html', {'items': items, 'order': order, 'cartItems': cartItems, 'navbar': 'cart'})
 
+
+def search(request):
+    if request.method == 'GET':
+        query = request.GET.get('query')
+        if query:
+            # check characters typed in both lower and upper case in the search bar
+            book = Book.objects.all().filter(Q(title__icontains=query) | Q(author__icontains=query) | Q(publisher__icontains=query) | Q(publishDate__icontains=query) | Q(ISBN__icontains=query))
+            category = Category.objects.all().filter(Q(name__icontains=query))
+
+            return render(request, 'search.html', {'book': book,'category':category, 'query': query})
+
+        return render(request, 'search.html')
+
+
+
+
+def adminDashboard(request):
+    return render(request, 'admin/index.html')
 
 def thankyou(request):
     return render(request, 'thankyou.html')

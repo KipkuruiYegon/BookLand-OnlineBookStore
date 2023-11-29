@@ -14,9 +14,9 @@ urlpatterns = [
     path('category_books_collection/<id>/', views.category_books_collection, name="category_books_collection"),
     path('cart/', views.cart, name="cart"),
     path('updateItem/', views.updateItem, name="updateItem"),
-    # path('addbook_cart/<uuid:book_id>/', views.addbook_cart, name='addbook_cart'),
     path('removebook_cart/', views.removebook_cart, name="removebook_cart"),
     path('blog/', views.blog, name="blog"),
     path('checkout/', views.checkout, name="checkout"),
-    path('thankyou/', views.thankyou, name="thankyou")
+    path('thankyou/', views.thankyou, name="thankyou"),
+    path('search/', views.search, name="search")
 ]

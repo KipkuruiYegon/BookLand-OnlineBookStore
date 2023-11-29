@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'bookshopstore',
     'shopper_users',
+    'adminmanage',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
