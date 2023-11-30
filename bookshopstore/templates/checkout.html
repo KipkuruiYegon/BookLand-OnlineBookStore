@@ -19,8 +19,9 @@
     <section class="ftco-section">
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-xl-10 ftco-animate">
-						<form action="#" class="billing-form">
+          <div class="col-xl-10 ftco-animate" >
+			  <div id="shipping-info">
+			  <form action="" class="billing-form" id="form">
 							<h3 class="mb-4 billing-heading">Shipping/Billing Details</h3>
 	          	<div class="row align-items-end">
 	          		<div class="col-md-6">
@@ -93,20 +94,29 @@
                 <div class="w-100"></div>
                 <div class="col-md-12">
                 	<div class="form-group mt-4">
-										<div class="radio">
-										  <label class="mr-3"><input type="radio" name="optradio"> Create an Account? </label>
-										  <label><input type="radio" name="optradio"> Ship to different address</label>
-										</div>
-									</div>
+					<div class="radio">
+
+					  <label><input id="form-button" class="btn btn-primary py-3 px-4 " type="submit" value="Confirm Details"></label>
+					</div>
+				</div>
                 </div>
 	            </div>
-	          </form><!-- END -->
+	          </form>
+
+		  </div>
+
+
+			  <!-- END -->
 
 
 
+			<div id="payment-info"  hidden>
 	          <div class="row mt-5 pt-3 d-flex">
+
+
 	          	<div class="col-md-6 d-flex">
-	          		<div class="cart-detail cart-total bg-light p-3 p-md-4">
+
+	          		<div class="cart-detail cart-total bg-light p-3 p-md-4" >
 	          			<h3 class="billing-heading mb-4">Cart Total</h3>
 	          			<p class="d-flex">
 		    						<span>Subtotal</span>
@@ -114,11 +124,11 @@
 		    					</p>
 		    					<p class="d-flex">
 		    						<span>Delivery</span>
-		    						<span>Ksh 150.00 X {{ order.get_cart_items }} Books</span>
+		    						<span>Ksh 0.00 X {{ order.get_cart_items }} Books</span>
 		    					</p>
 		    					<p class="d-flex">
 		    						<span>Discount</span>
-		    						<span>Ksh 350.00</span>
+		    						<span>Ksh 0.00</span>
 		    					</p>
 		    					<hr>
 		    					<p class="d-flex total-price">
@@ -126,7 +136,8 @@
 		    						<span>Ksh {{ order.get_cart_total }}</span>
 		    					</p>
 								</div>
-	          	</div>
+					</div>
+
 	          	<div class="col-md-6">
 	          		<div class="cart-detail bg-light p-3 p-md-4">
 	          			<h3 class="billing-heading mb-4">Payment Method</h3>
@@ -162,9 +173,31 @@
 								</div>
 	          	</div>
 	          </div>
+			</div>
           </div> <!-- .col-md-8 -->
         </div>
       </div>
     </section> <!-- .section -->
-		
+
+
+
+<script type="text/javascript">
+	var shipping = "{{order.shipping}}"
+
+	if (shipping == 'False' ){
+		document.getElementById('shipping-info').innerHTML = ''
+	}
+
+	var form = document.getElementById('form')
+
+	form.addEventListener('submit', function(e){
+		e.preventDefault()
+		console.log('Form Submitted')
+		document.getElementById('form-button').classList.add('hidden')
+		document.getElementById('payment-info').classList.remove('hidden')
+	})
+
+
+</script>
+
 {% endblock %}

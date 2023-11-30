@@ -21,6 +21,7 @@ class Book(models.Model):
     image = models.ImageField(upload_to='bookcovers', default='cover.jpg')
     publishDate = models.DateField(blank=False)
     ISBN = models.CharField(max_length=100, blank=False)
+    on_sale = models.BooleanField(default=False, null=True, blank=False)
 
     def __str__(self):
         return self.title
@@ -43,10 +44,14 @@ class Order(models.Model):
 
     def __str__(self):
         return str(self.id)
-    @Property
+
+    @property
     def shipping(self):
         shipping = False
         orderitems = self.orderitem_set.all()
+        for i in orderitems:
+            if i.book.on_sale == False:
+                shipping = True
         return shipping
 
 

@@ -18,7 +18,7 @@ def home(request):
         cartItems = order.get_cart_items
     else:
         items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
 
     book = Book.objects.all().order_by('?')
@@ -40,7 +40,7 @@ def about(request):
         cartItems = order.get_cart_items
     else:
         items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
     categories = Category.objects.all()
     return render(request, 'about.html', {'categories':categories,'cartItems': cartItems, 'navbar': 'about'})
@@ -58,7 +58,7 @@ def bookcollection(request):
         cartItems = order.get_cart_items
     else:
         items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
     book = Book.objects.all()
     category = Category.objects.all().order_by('?')
@@ -109,7 +109,7 @@ def cart(request):
         cartItems = order.get_cart_items
     else:
         items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
     return render(request, 'cart.html', {'items': items, 'order': order, 'cartItems': cartItems, 'navbar': 'cart'})
 
@@ -153,7 +153,7 @@ def checkout(request):
         cartItems = order.get_cart_items
     else:
         items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
     return render(request, 'checkout.html', {'items': items, 'order': order, 'cartItems': cartItems, 'navbar': 'cart'})
 
@@ -188,7 +188,7 @@ def contact(request):
         cartItems = order.get_cart_items
     else:
         items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
     categories = Category.objects.all()
     return render(request, 'contact.html', {'categories': categories,'cartItems': cartItems, 'navbar': 'contact'})
