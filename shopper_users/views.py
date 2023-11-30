@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from bookshopstore.models import *
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignupForm
 
@@ -54,4 +55,13 @@ def logout_account(request):
 
 
 def myaccount(request):
-    return render(request, 'authentication/myaccount.html')
+    if request.user.is_authenticated:
+        customer = request.user
+        order, created = Order.objects.get_or_create(customer=customer, completed=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        cartItems = order['get_cart_items']
+    return render(request, 'authentication/myaccount.html',  {'cartItems': cartItems})

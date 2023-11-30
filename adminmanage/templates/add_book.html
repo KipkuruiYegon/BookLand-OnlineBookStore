@@ -408,10 +408,86 @@
       </nav>
 <!-- partial -->
 
-          {% block body %}
-          {% end block %}
+ <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
 
 
+            <div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Add Book Form</h4>
+                  {% for message in messages %}
+                        <div class="alert alert-primary" role="alert">
+                          {{ message }}
+                        </div>
+                    {% endfor %}
+
+                  <p class="card-description">
+                    Basic form elements
+                  </p>
+                  <form class="forms-sample" action="{% url 'adminmanage:add_book' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="exampleInputName1">Title</label>
+                      <input type="text" class="form-control" id="exampleInputName1" placeholder="Title" name="title">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputName1">Author</label>
+                      <input type="text" class="form-control" id="exampleInputName1" placeholder="Author" name="author">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="exampleInputName1">Category</label>
+                      <select class="form-control" id="id_category" name="category">
+                          {% for category in categories %}
+                              <option value="{{ category.id }}">{{ category.name }}</option>
+                          {% endfor %}
+                      </select>
+                  </div>
+
+                    <div class="form-group">
+                      <label for="exampleInputName1">Publisher</label>
+                      <input type="text" class="form-control" id="exampleInputName1" placeholder="Publisher" name="publisher">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputName1">Price</label>
+                      <input type="number" class="form-control" id="exampleInputName1" placeholder="Price" name="price">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputName1">ISBN</label>
+                      <input type="number" class="form-control" id="exampleInputName1" placeholder="ISBN" name="ISBN">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputName1">Publish Date</label>
+                      <input type="date" class="form-control" id="exampleInputName1" placeholder="PublishDate" name="publishDate">
+                    </div>
+                    <div class="form-group">
+                        <label>Book Image upload</label>
+
+                        <div class="input-group col-xs-12">
+                            <input type="file" name="image" class="form-control file-upload-info" placeholder="Upload Image">
+                            <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="exampleTextarea1">Description</label>
+                      <textarea class="form-control" id="exampleTextarea1" rows="4" name="description"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button class="btn btn-light">Cancel</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
 
 
 
@@ -457,5 +533,3 @@
 
 <!-- Mirrored from demo.bootstrapdash.com/skydash-free/template/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Nov 2023 17:33:11 GMT -->
 </html>
-      footer here
-

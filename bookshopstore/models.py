@@ -15,11 +15,11 @@ class Book(models.Model):
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=100, blank=False)
     description = models.TextField(blank=True, default='', null=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1, max_length=100, blank=False)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, default=0, max_length=100, blank=False)
     publisher = models.CharField(max_length=100, blank=False)
-    price = models.DecimalField(max_digits=100, default=0, decimal_places=2, blank=False)
+    price = models.DecimalField(max_digits=100, default=0, decimal_places=2, blank=True, null=True)
     image = models.ImageField(upload_to='bookcovers', default='cover.jpg')
-    publishDate = models.DateField(max_length=100, blank=False)
+    publishDate = models.DateField(blank=False)
     ISBN = models.CharField(max_length=100, blank=False)
 
     def __str__(self):
@@ -42,7 +42,15 @@ class Order(models.Model):
     transaction_id = models.CharField(max_length=200, null=True)
 
     def __str__(self):
-        return str(self.transaction_id)
+        return str(self.id)
+    @Property
+    def shipping(self):
+        shipping = False
+        orderitems = self.orderitem_set.all()
+        return shipping
+
+
+
 
     @property
     def get_cart_total(self):
@@ -57,7 +65,6 @@ class Order(models.Model):
         return total
 
 
-
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, blank=True)
     book = models.ForeignKey(Book, on_delete=models.SET_NULL, null=True, blank=True)
@@ -65,13 +72,12 @@ class OrderItem(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.book.title
+        return str(self.order)
 
     @property
     def get_total(self):
         total = self.book.price * self.quantity
         return total
-
 
 
 class Address(models.Model):
@@ -161,7 +167,7 @@ class Blog(models.Model):
     image = models.ImageField(upload_to='blogs', default='blog.jpg')
 
     def __str__(self):
-        return self.tag
+        return self.tag.tagitem
 
 
 # Blog comments model

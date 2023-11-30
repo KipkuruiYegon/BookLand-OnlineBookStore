@@ -316,7 +316,7 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Add Book</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{% url 'adminmanage:add_book' %}">Add Book</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Books Table</a></li>
 <!--                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>-->
               </ul>
@@ -407,11 +407,72 @@
         </ul>
       </nav>
 <!-- partial -->
+<!--contents here-->
+      <div class="main-panel">
+        <div class="content-wrapper">
+           <h3 class="font-weight-bold">{{ book.title }}</h3>
+          <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+              <div class="card position-relative">
+                <div class="card-body">
+                  <div id="detailedReports" class="carousel slide detailed-report-carousel position-static pt-2" data-ride="carousel">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <div class="row">
+                          <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">
+                            <div class="ml-xl-4 mt-3">
+                            <p class="card-title">Price</p>
 
-          {% block body %}
-          {% end block %}
+                              <h3 class="text-primary">Ksh {{ book.price }}</h3>
+                              <img src="/media/{{ book.image }}" class="img-fluid">
+
+                            </div>
+                            </div>
+                          <div class="col-md-12 col-xl-9">
+                            <div class="row">
+                               <div class="col-md-9 mt-3">
+                                 <p class="card-title">Description</p>
+                              <p class="mb-2 mb-xl-0">{{ book.description }}</p>
 
 
+                                 <h3 class="font-weight-bold">Actions </h3>
+                                 <a class="btn btn-primary" href="/edit_book_item/{{ book.id }}">Edit</a>
+                                 <a class="btn btn-danger"  href="/delete_book_item/{{ book.id }}">Delete</a>
+
+                               </div>
+
+
+                              <div class="col-md-3 mt-3">
+                                <p class="card-title">Publisher</p>
+                                 <p class=" mb-xl-0">{{ book.publisher }}</p>
+                                <p class="card-title">ISBN</p>
+                                 <p class="mb-2 mb-xl-0">{{ book.ISBN }}</p>
+                                <p class="card-title">Author</p>
+                                 <p class="mb-2 mb-xl-0">{{ book.author }}</p>
+                                <p class="card-title">PublishDate</p>
+                                 <p class="mb-2 mb-xl-0">{{ book.publishDate }}
+                                <p class="card-title">Category</p>
+                                 <p class="mb-2 mb-xl-0">{{ book.category }}</p>
+
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+
+          </div>
+
+        <!-- content-wrapper ends -->
 
 
 
@@ -457,5 +518,3 @@
 
 <!-- Mirrored from demo.bootstrapdash.com/skydash-free/template/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Nov 2023 17:33:11 GMT -->
 </html>
-      footer here
-

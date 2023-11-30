@@ -407,74 +407,63 @@
         </ul>
       </nav>
 <!-- partial -->
-
- <!-- partial -->
-      <div class="main-panel">
+<div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
 
-
-            <div class="col-12 grid-margin stretch-card">
+            <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Add Book Form</h4>
+                  <h4 class="card-title">Books Table</h4>
                   <p class="card-description">
-                    Basic form elements
+                    Add class <code>.table-hover</code>
                   </p>
-                  <form class="forms-sample">
-                    <div class="form-group">
-                      <label for="exampleInputName1">Title</label>
-                      <input type="text" class="form-control" id="exampleInputName1" placeholder="Title" name="title">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputName1">Author</label>
-                      <input type="text" class="form-control" id="exampleInputName1" placeholder="Author" name="author">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputName1">Category</label>
-                      <input type="text" class="form-control" id="exampleInputName1" placeholder="Category" name="category">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputName1">Publisher</label>
-                      <input type="text" class="form-control" id="exampleInputName1" placeholder="Publisher">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputName1">Price</label>
-                      <input type="number" class="form-control" id="exampleInputName1" placeholder="Price" name="price">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputName1">ISBN</label>
-                      <input type="number" class="form-control" id="exampleInputName1" placeholder="ISBN" name="ISBN">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputName1">Publish Date</label>
-                      <input type="date" class="form-control" id="exampleInputName1" placeholder="PublishDate" name="date">
-                    </div>
-                    <div class="form-group">
-                      <label>BookImage upload</label>
-                      <input type="file" name="image" class="file-upload-default" accept="images/jpg, images/png">
-                      <div class="input-group col-xs-12">
-                        <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
-                        <span class="input-group-append">
-                          <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleTextarea1">Description</label>
-                      <textarea class="form-control" id="exampleTextarea1" rows="4" name="description"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                    <button class="btn btn-light">Cancel</button>
-                  </form>
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <thead>
+
+                        <tr>
+                          <th>#</th>
+                          <th>Author</th>
+                          <th>category</th>
+<!--                           <th>ISBN</th>-->
+                          <th>Status</th>
+                          <th>Details</th>
+                          <th>Action</th>
+                           <th>Title</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for book in book %}
+                        <tr>
+                          <td>{{ book.id }}</td>
+                          <td>{{book.author}}</td>
+                          <td>{{book.category}}</td>
+<!--                          <td>{{book.ISBN}}</td>-->
+                          <td><label class="badge badge-danger">On Sale</label></td>
+                          <td>
+                            <a class="btn btn-sm btn-primary" href="{% url 'adminmanage:view_book_details' book.id %}">View</a>
+                          </td>
+                          <td>   <a class="btn btn-sm btn-primary" href="{% url 'adminmanage:edit_book_item' book.id %}">Edit</a></td>
+                           <td>{{book.title}}</td>
+
+                        </tr>
+                      {% endfor %}
+
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
 
+
+
+
+
           </div>
         </div>
         <!-- content-wrapper ends -->
-
 
 
              <!-- partial:partials/_footer.html -->

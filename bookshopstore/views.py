@@ -25,13 +25,25 @@ def home(request):
     slider = SliderHome.objects.all().order_by('?')
     socialFollow = Socialfollow.objects.all().order_by('?')
     promo = PromoPageImage.objects.all().order_by('?')
+    categories = Category.objects.all()
+
     return render(request, 'home.html',
                   {'book': book, 'slider': slider, 'socialFollow': socialFollow, 'promo': promo, 'cartItems': cartItems,
-                   'navbar': 'home'})
+                   'categories': categories, 'navbar': 'home'})
 
 
 def about(request):
-    return render(request, 'about.html', {'navbar': 'about'})
+    if request.user.is_authenticated:
+        customer = request.user
+        order, created = Order.objects.get_or_create(customer=customer, completed=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        cartItems = order['get_cart_items']
+    categories = Category.objects.all()
+    return render(request, 'about.html', {'categories':categories,'cartItems': cartItems, 'navbar': 'about'})
 
 
 def news(request):
@@ -48,10 +60,11 @@ def bookcollection(request):
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0}
         cartItems = order['get_cart_items']
-    book = Book.objects.all().order_by('?')
+    book = Book.objects.all()
     category = Category.objects.all().order_by('?')
+    categories = Category.objects.all()
     return render(request, 'bookcollection.html',
-                  {'book': book, 'items': items, 'category': category, 'cartItems': cartItems,'navbar': 'bookcollection'})
+                  {'book': book, 'items': items, 'category': category, 'cartItems': cartItems,'categories':categories,'navbar': 'bookcollection'})
 
 
 def book_details(request, id):
@@ -71,7 +84,8 @@ def book_details(request, id):
 def category_books_collection(request, id):
     category = Category.objects.get(id=id)
     book = Book.objects.filter(category=category)
-    return render(request, 'category_books_collection.html', {'category': category, 'book': book})
+    categories = Category.objects.all()
+    return render(request, 'category_books_collection.html', {'category': category,'categories': categories, 'book': book})
 
 
 def addbook_cart(request, id):
@@ -167,7 +181,17 @@ def thankyou(request):
 
 
 def contact(request):
-    return render(request, 'contact.html', {'navbar': 'contact'})
+    if request.user.is_authenticated:
+        customer = request.user
+        order, created = Order.objects.get_or_create(customer=customer, completed=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        cartItems = order['get_cart_items']
+    categories = Category.objects.all()
+    return render(request, 'contact.html', {'categories': categories,'cartItems': cartItems, 'navbar': 'contact'})
 
 
 def errorpage(request):
