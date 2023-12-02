@@ -97,13 +97,14 @@ class Address(models.Model):
 
 
 # Customer model
-class ShippingDetail(models.Model):
+class ShippingAddress(models.Model):
     customer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, blank=True)
-    city = models.CharField(max_length=100)
-    county = models.CharField(max_length=100)
-    zipcode = models.CharField(max_length=100)
-    title = models.CharField(max_length=100)
+    city = models.CharField(max_length=100, null=True)
+    address = models.CharField(max_length=100)
+    state = models.CharField(max_length=100, null=True)
+    zipcode = models.CharField(max_length=100, null=True)
+    phone = models.CharField(max_length=100, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
 
 

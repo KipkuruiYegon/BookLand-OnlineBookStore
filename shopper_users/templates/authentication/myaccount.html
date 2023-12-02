@@ -5,14 +5,77 @@
 {% block body %}
 
 <div class="hero-wrap hero-bread" style="background-image: url('{% static 'images/bg_6.jpg' %}');">
-      <div class="container">
+    <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Account</span></p>
-            <h1 class="mb-0 bread">My Account </h1>
-          </div>
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>My Account</span></p>
+                <h1 class="mb-0 bread">My Account <span class="icon-heart"></span>{{ total_quantity }} Items</h1>
+                <a href="{% url 'bookshopstore:home' %}" style="border-radius:0px; width:250px;background-color: black;" class="btn btn-primary add-to-cart text-center py-2 mr-1 addbook-btn "><span>Continue Shopping <i class="ion-ios-add ml-1"></i></span></a>
+            </div>
         </div>
-      </div>
+    </div>
 </div>
+
+<section class="ftco-section ftco-cart">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ftco-animate">
+                <div class="cart-list">
+                    <table class="table">
+                        <thead class="thead-primary">
+                            <tr class="textcenter">
+                                <th>OrderID</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Amount</th>
+                                <th>Arrival Date</th>
+                                <th>Details</th>
+                                <th>Cancel Order</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in user_orders %}
+                                <tr class="text-center">
+                                    <td>{{ order.id }}</td>
+                                    <td>{{ order.date_ordered }}</td>
+                                    <td>{{ order.status }}</td>
+                                    <td>{{ order.get_cart_total }}</td>
+                                    <td>{{ order.arrival_date }}</td>
+                                    <td><a href="">View Details</a></td>
+                                    <td><a href="">Cancel Order</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-start">
+            <div class="col col-lg-5 col-md-6 mt-5 cart-wrap ftco-animate">
+                <div class="cart-total mb-3">
+                    <h3>Order Pending</h3>
+                   <p class="d-flex">
+    						<span>Subtotal</span>
+    						<span>Ksh {{ order.get_cart_total }}</span>
+    					</p>
+    					<p class="d-flex">
+    						<span>Delivery</span>
+    						<span>Ksh 0.00 x {{ order.get_cart_items }} books</span>
+    					</p>
+    					<p class="d-flex">
+    						<span>Discount</span>
+    						<span>Ksh 0.00 </span>
+    					</p>
+    					<hr>
+    					<p class="d-flex total-price">
+    						<span>Total</span>
+    						<span>Ksh {{ order.get_cart_total }}</span>
+    					</p>
+                </div>
+                <p class="text-center"><a href="{% url 'bookshopstore:cart' %}" class="btn btn-primary py-3 px-4">Go to Cart</a></p>
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock %}

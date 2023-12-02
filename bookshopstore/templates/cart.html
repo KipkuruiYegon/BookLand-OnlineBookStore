@@ -67,7 +67,13 @@
 							  <!-- END TR-->
 							 {% else %}
 							<tr>
-								<td colspan="6" class="text-center">Your cart is empty.</td>
+								<td colspan="6" class="text-center">Your cart is empty.
+								   {% for message in messages %}
+                        <div class="alert alert-primary" role="alert">
+                          {{ message }}
+                        </div>
+                    {% endfor %}
+								</td>
 							</tr>
     					{% endif %}
 

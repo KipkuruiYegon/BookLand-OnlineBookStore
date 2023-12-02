@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from bookshopstore.models import *
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignupForm
+from django.shortcuts import render
+from bookshopstore.models import Order
 
 
 # Create your views here.
@@ -54,14 +57,19 @@ def logout_account(request):
     return redirect("/shopper_users/signin_Page/")
 
 
+@login_required
 def myaccount(request):
-    if request.user.is_authenticated:
-        customer = request.user
-        order, created = Order.objects.get_or_create(customer=customer, completed=False)
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
-    else:
-        items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0}
-        cartItems = order['get_cart_items']
-    return render(request, 'authentication/myaccount.html',  {'cartItems': cartItems})
+    customer = request.user
+    orders = Order.objects.filter(customer=customer, completed=False)
+    cart_items = sum([order.get_cart_items for order in orders])
+
+    context = {
+        'user_orders': orders,  # Renamed to 'user_orders' for consistency with template
+        'cart_items': cart_items,
+    }
+
+    return render(request, 'authentication/myaccount.html', context)
+
+def get_user_orders(user):
+    """Fetch all orders for a specific user."""
+    return Order.objects.filter(customer=user)
